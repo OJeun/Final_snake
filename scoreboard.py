@@ -30,10 +30,10 @@ class Scoreboard(Turtle):
         self.clear()
         self.update_scoreboard()
 
-    # need to add code to reset the game
-    # def game_over(self):
-    #     self.goto(0, 0)
-    #     self.write("GAME OVER", align=ALIGNMENT, font=FONT)
+    def game_over(self):
+        self.goto(0, 0)
+        self.clear()
+        self.write("GAME OVER", align=ALIGNMENT, font=FONT)
 
     def increase_score(self):
         self.score += 1

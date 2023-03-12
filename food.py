@@ -12,10 +12,15 @@ class Food(Turtle):
         self.shape("circle")
         self.penup()
         self.shapesize(stretch_len=0.5, stretch_wid=0.5)
-        self.color("blue")
+
+        # number_list = [0, 1, 2, 3, 4]
+        # number_set = set()
+        # while len(number_set) < 6:
+        #     number_set.add(random.randint(0, 5))
+        # self.color(random.choice(["white", "red", "yellow"]))
         self.speed("fastest")
         self.refresh()
-        # self.color('deep pink')
+        self.color('deep pink')
         # self.penup()
         # self.style = ('Courier', 30, 'italic')
         # self.write('Hello!', align='center')
