@@ -103,10 +103,11 @@ fifth_turtle.color("red")
 
 five_object = \
     [first_turtle, second_turtle, third_turtle, fourth_turtle, fifth_turtle]
+for i in five_object:
+    print(type(i))
 answer_object = question_data[0]["Answer"]
 correct_food = five_object[answer_object-1]
 print(type(correct_food))
-except_answer_objects = five_object.remove(correct_food)
 
 
 # def answer_coord(correct_object):
@@ -152,6 +153,7 @@ while game_is_on:
 
         snake.extend()
         scoreboard.increase_score()
+
 
     # Detect collision with wall.
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
