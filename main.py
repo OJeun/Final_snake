@@ -160,6 +160,10 @@ def main():
             question_turtle.write(question, font=("Verdana", 12, "normal"))
             choice_turtle.write(choice, font=("Verdana", 10, "normal"))
             snake.extend()
+            if scoreboard.question == 11:
+                scoreboard.reset()
+                snake.remove_snake()
+                scoreboard.all_questions_finished()
             scoreboard.increase_score()
 
         for i in incorrect_object:
@@ -178,10 +182,10 @@ def main():
             scoreboard.game_over()
             # snake.reset()
 
-        if scoreboard.question == 10:
-            scoreboard.reset()
-            snake.remove_snake()
-            scoreboard.all_questions_finished()
+        # if scoreboard.question == 11:
+        #     scoreboard.reset()
+        #     snake.remove_snake()
+        #     scoreboard.all_questions_finished()
 
         # Detect collision with tail.
         for segment in snake.segments:
