@@ -89,11 +89,17 @@ screen.tracer(0)
 #     return fifth_data
 
 
-first_turtle = Food("first").color("pink")
-second_turtle = Food("second").color("orange")
-third_turtle = Food("third").color("yellow")
-fourth_turtle = Food("fourth").color("blue")
-fifth_turtle = Food("fifth").color("red")
+first_turtle = Food("first")
+first_turtle.color("pink")
+second_turtle = Food("second")
+second_turtle.color("orange")
+third_turtle = Food("third")
+third_turtle.color("yellow")
+fourth_turtle = Food("fourth")
+fourth_turtle.color("blue")
+fifth_turtle = Food("fifth")
+fifth_turtle.color("red")
+
 
 five_object = \
     [first_turtle, second_turtle, third_turtle, fourth_turtle, fifth_turtle]
@@ -103,13 +109,13 @@ print(type(correct_food))
 except_answer_objects = five_object.remove(correct_food)
 
 
-def answer_coord(correct_object):
-    x = correct_object.xcor()
-    y = correct_object.ycor()
-    tuple_x_y = (x, y)
-    return tuple_x_y
-
-answer_coordinate = answer_coord(correct_food)
+# def answer_coord(correct_object):
+#     x = correct_object.xcor()
+#     y = correct_object.ycor()
+#     tuple_x_y = (x, y)
+#     return tuple_x_y
+#
+# answer_coordinate = answer_coord(fifth_turtle)
 
 
 
@@ -134,7 +140,7 @@ while game_is_on:
     snake.move()
 
     # Detect collision with food.
-    if snake.head.distance(answer_coordinate) < 15:
+    if snake.head.distance(correct_food) < 15:
 
         # food.refresh()
         # initial_foods = make_5_foods()
