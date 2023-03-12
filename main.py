@@ -11,7 +11,8 @@ screen.bgcolor("black")
 screen.title("My Snake Game")
 screen.tracer(0)
 
-
+answer_object = "hi"
+correct_food = "Julie"
 def make_5_foods():
     """
     Make 5 foods with different colors
@@ -20,32 +21,58 @@ def make_5_foods():
     five_object = []
     first_choice = Food()
     first_choice.color("green")
+    first_choice.refresh()
     five_object.append(first_choice)
     second_choice = Food()
     second_choice.color("red")
+    second_choice.refresh()
     five_object.append(second_choice)
     third_choice = Food()
     third_choice.color("yellow")
+    third_choice.refresh()
     five_object.append(third_choice)
     fourth_choice = Food()
     fourth_choice.color("purple")
+    fourth_choice.refresh()
     five_object.append(fourth_choice)
     fifth_choice = Food()
     fifth_choice.color("blue")
+    fifth_choice.refresh()
     five_object.append(fifth_choice)
+    print(five_object)
+
+    global answer_object
+    answer_object = question_data[0]["Answer"]
+    global correct_food
+    correct_food = five_object[answer_object-1]
+
     return five_object
 
-question_answer = question_data[0]["Answer"]
-print(question_answer)
+    # global answer_object
+    # answer_object = question_data[0]["Answer"]
+    # print(answer_object)
+    # global correct_food
+    # correct_food = five_object[answer_object-1]
+    # print(correct_food)
 
 
-# with open("data.py") as data:
-#     question = data.read()
-#     print(question_dict["Answer"])
 
-# five_colors_objects = make_5_foods()
-# for food in five_colors_objects:
-#     food
+# def remove_objects(list):
+#     for obj in list:
+#         list.pop
+
+
+def answer_coord(correct_object):
+    x = correct_object.xcor()
+    y = correct_object.ycor()
+    tuple_x_y = (x, y)
+    return tuple_x_y
+
+
+
+# question_answer = question_data[0]["Answer"]
+# print(question_answer)
+
 
 snake = Snake()
 food = Food()
@@ -65,8 +92,9 @@ while game_is_on:
     snake.move()
 
     # Detect collision with food.
-    if snake.head.distance(food) < 15:
-        food.refresh()
+    if snake.head.distance(correct_food) < 15:
+        # food.refresh()
+        make_5_foods()
         snake.extend()
         scoreboard.increase_score()
 
