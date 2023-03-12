@@ -7,117 +7,83 @@ from data import question_data
 import time
 import copy
 
+import turtle
+from turtle import Screen, Turtle
+from snake import Snake
+from food import Food
+from scoreboard import Scoreboard
+from data import question_data
+import time
+from question import Question
+from choice import Choice
+import copy
+
 screen = Screen()
-screen.setup(width=600, height=800)
+screen.setup(width=600, height=870)
 screen.bgcolor("black")
-screen.title("My Snake Game")
+screen.title("Job Security")
 screen.tracer(0)
 
-# answer_object = "hi"
-# correct_food = "Julie"
-# five_object = "Mika"
-#
-# first_choice = "1"
-# second_choice = "2"
-# third_choice = "3"
-# fourth_choice = "4"
-# fifth_choice = "5"
+
+def generate_setting():
+    setting_dict = {}
+    setting_dict['first'] = 'pink'
+    setting_dict['second'] = 'orange'
+    setting_dict['third'] = 'yellow'
+    setting_dict['fourth'] = 'blue'
+    return setting_dict
 
 
-# def make_5_foods():
-#     """
-#     Make 5 foods with different colors
-#     :return: a list that contains five food objects
-#     """
-#     five_object = []
-#     global first_choice
-#     first_choice = Food()
-#     first_choice.color("green")
-#     first_choice.refresh()
-#     five_object.append(first_choice)
-#     global second_choice
-#     second_choice = Food()
-#     second_choice.color("red")
-#     second_choice.refresh()
-#     five_object.append(second_choice)
-#     global third_choice
-#     third_choice = Food()
-#     third_choice.color("yellow")
-#     third_choice.refresh()
-#     five_object.append(third_choice)
-#     global fourth_choice
-#     fourth_choice = Food()
-#     fourth_choice.color("purple")
-#     fourth_choice.refresh()
-#     five_object.append(fourth_choice)
-#     global fifth_choice
-#     fifth_choice = Food()
-#     fifth_choice.color("blue")
-#     fifth_choice.refresh()
-#     five_object.append(fifth_choice)
-#     print(five_object)
-#
-#     global answer_object
-#     answer_object = question_data[0]["Answer"]
-#     global correct_food
-#     correct_food = five_object[answer_object-1]
-#     five_object.remove(correct_food)
-#     print(five_object)
+def each_number_color():
+    dict = generate_setting().values()
+    xcor = -70
+    ycor = -350
+    for color in dict:
+        new_turtle = Turtle()
+        new_turtle.write("1")
+        new_turtle.color(color)
+        new_turtle.shape("circle")
+        new_turtle.penup()
+        new_turtle.goto(xcor, ycor)
+        xcor += 30
+
+each_number_color()
 
 
-# def make_first_choice():
-#     first_data = Food()
-#     first_data.color("red")
-#     return first_data
+# 여기까지가 선택지 객체 만드는 함수
+def generate_turtle(setting_dict):
+    select_arr = ['first', 'second', 'third', 'fourth']
+    select_obj = []
+    for i in range(4):
+        temp_turtle = Food(select_arr[i])
+        temp_turtle.color(setting_dict[select_arr[i]])
+        select_obj.append(temp_turtle)
 
-# def make_second_choice():
-#     second_data = Food()
-#     second_data.color("blue")
-#     return second_data
-#
-# def make_third_choice():
-#     third_data = Food()
-#     third_data.color("yellow")
-#     return third_data
-#
-# def make_fourth_choice():
-#     fourth_data = Food()
-#     fourth_data.color("orange")
-#     return fourth_data
-#
-# def make_fifth_choice():
-#     fifth_data = Food()
-#     fifth_data.color("pink")
-#     return fifth_data
+    return select_obj
 
 
-first_turtle = Food("first")
-first_turtle.color("pink")
-second_turtle = Food("second")
-second_turtle.color("orange")
-third_turtle = Food("third")
-third_turtle.color("yellow")
-fourth_turtle = Food("fourth")
-fourth_turtle.color("blue")
-fifth_turtle = Food("fifth")
-fifth_turtle.color("red")
+def mapping_question(data, index):
+    question = data[index]['Q']
+    choice = data[index]['choices']
+    # choice = choice.split('\n')
+    # new_choice = []
+    # for i in range(len(choice)):
+    #     if choice[i] == '':
+    #         continue
+    #     else:
+    #         new_choice.append(choice[i].strip())
+    # choice = new_choice
+    answer = data[index]['Answer']
+    return question, choice, answer
 
 
-five_object = \
-    [first_turtle, second_turtle, third_turtle, fourth_turtle, fifth_turtle]
-for i in five_object:
-    print(type(i))
-answer_object = question_data[0]["Answer"]
+setting_dict = generate_setting()
+select_turtle = generate_turtle(setting_dict)
 
 
-correct_food = five_object[answer_object-1]
-print(type(correct_food))
-five_object.pop(answer_object-1)
-incorrect_choices = five_object
-
+# 문제를 만드는 함수
 def make_question(index):
-    question_text = question_data[index]["Q1"]
-    print(question_text)
+    question_text = question_data[index]["Q"]
     question = Turtle()
     question.goto(0, 380)
     question.color("white")
@@ -125,86 +91,107 @@ def make_question(index):
     question.write(question_text)
 
 
-
-
-
-make_question(0)
-
-
-
-
+# 답 위치 함수
 def answer_coord(correct_object):
     x = correct_object.xcor()
     y = correct_object.ycor()
     tuple_x_y = (x, y)
     return tuple_x_y
 
-answer_coordinate = answer_coord(fifth_turtle)
 
+def make_line(ycor):
+    line_turtle = Turtle()
+    line_turtle.color("white")
+    line_turtle.penup()
+    line_turtle.goto(-300, ycor)
+    line_turtle.pendown()
+    line_turtle.goto(300, ycor)
 
+def main():
+    snake = Snake()
+    scoreboard = Scoreboard()
+    make_line(310)
+    make_line(-305)
+    screen.listen()
+    screen.onkey(snake.up, "Up")
+    screen.onkey(snake.down, "Down")
+    screen.onkey(snake.left, "Left")
+    screen.onkey(snake.right, "Right")
+    index = 0
+    # 1차적으로 일단 우리는 답에 대한 초기값을 설정합니다.
+    # First, we set correct answer and question.
+    question, choice, answer = mapping_question(question_data, index)
+    # 첫번째 질문에 대한 답은 2번 초기값을 답 2로 매칭시켜버렸다.
 
-# question_answer = question_data[0]["Answer"]
-# print(question_answer)
+    question_turtle = Question(question)
+    choice_turtle = Choice(choice)
 
+    game_is_on = True
+    while game_is_on:
+        # 움직인닷!
+        screen.update()
+        time.sleep(0.1)
+        snake.move()
+        correct_object = select_turtle[answer - 1]
+        # 어렵게 가지 말자
+        incorrect_object = []
 
-snake = Snake()
-food = Food("random")
-scoreboard = Scoreboard()
+        for i, value in enumerate(select_turtle):
+            if i == answer - 1:
+                continue
+            else:
+                incorrect_object.append(value)
 
-screen.listen()
-screen.onkey(snake.up, "Up")
-screen.onkey(snake.down, "Down")
-screen.onkey(snake.left, "Left")
-screen.onkey(snake.right, "Right")
+        # 결국 뱀의 머리가 정답간의 거리가 15 이하일 때 정답으로 체크
+        if snake.head.distance(correct_object) < 15:
+            time.sleep(1.5)
+            index += 1
+            question, choice, answer = mapping_question(question_data, index)
+            scoreboard.increase_game()
+            for i in select_turtle:
+                i.refresh()
 
-game_is_on = True
-while game_is_on:
-    screen.update()
-    time.sleep(0.1)
-    snake.move()
+            question_turtle.clear()
+            choice_turtle.clear()
 
-    # Detect collision with food.
-    if snake.head.distance(correct_food) < 15:
-
-        # food.refresh()
-        # initial_foods = make_5_foods()
-        first_turtle.goto(1000, 1000)
-        second_turtle.goto(1000, 1000)
-        third_turtle.goto(1000, 1000)
-        fourth_turtle.goto(1000, 1000)
-        fifth_turtle.goto(1000, 1000)
-
-        snake.extend()
-        scoreboard.increase_score()
-
-    for i in incorrect_choices:
-        if snake.head.distance(i) < 15:
+            question_turtle.write(question, font=("Verdana", 12, "normal"))
+            choice_turtle.write(choice, font=("Verdana", 10, "normal"))
             snake.extend()
-            scoreboard.decrease_score()
+            scoreboard.increase_score()
 
+        for i in incorrect_object:
+            if snake.head.distance(i) < 15:
+                snake.extend()
+                scoreboard.decrease_score()
 
+        if scoreboard.score < -100:
+            scoreboard.reset()
+            snake.remove_snake()
+            scoreboard.game_over()
 
-
-    # Detect collision with wall.
-    if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-        scoreboard.reset()
-        snake.remove_snake()
-        scoreboard.game_over()
-        # snake.reset()
-
-    # Detect collision with tail.
-    for segment in snake.segments:
-        if segment == snake.head:
-            pass
-        elif snake.head.distance(segment) < 10:
+        if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
             scoreboard.reset()
             snake.remove_snake()
             scoreboard.game_over()
             # snake.reset()
 
+        if scoreboard.question == 10:
+            scoreboard.reset()
+            snake.remove_snake()
+            scoreboard.all_questions_finished()
+
+        # Detect collision with tail.
+        for segment in snake.segments:
+            if segment == snake.head:
+                pass
+            elif snake.head.distance(segment) < 10:
+                scoreboard.reset()
+                snake.remove_snake()
+                scoreboard.game_over()
+                snake.reset()
 
 
+# screen.exitonclick()
 
-
-
-screen.exitonclick()
+if __name__ == "__main__":
+    main()
