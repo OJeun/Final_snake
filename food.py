@@ -5,9 +5,10 @@ import random
 # Food inherit Turtle class
 class Food(Turtle):
 
-    def __init__(self):
+    def __init__(self, name):
         # super == parent object
         super().__init__()
+        self.name = name
         # By adding __init__, we can use method and attribute of turtle class
         self.shape("circle")
         self.penup()
