@@ -18,11 +18,7 @@ from question import Question
 from choice import Choice
 import copy
 
-screen = Screen()
-screen.setup(width=600, height=870)
-screen.bgcolor("black")
-screen.title("Job Security")
-screen.tracer(0)
+
 
 
 def generate_setting():
@@ -47,7 +43,7 @@ def each_number_color():
         new_turtle.goto(xcor, ycor)
         xcor += 30
 
-each_number_color()
+
 
 
 # 여기까지가 선택지 객체 만드는 함수
@@ -77,10 +73,6 @@ def mapping_question(data, index):
     return question, choice, answer
 
 
-setting_dict = generate_setting()
-select_turtle = generate_turtle(setting_dict)
-
-
 # 문제를 만드는 함수
 def make_question(index):
     question_text = question_data[index]["Q"]
@@ -108,7 +100,13 @@ def make_line(ycor):
     line_turtle.goto(300, ycor)
 
 def main():
+    screen = Screen()
+    screen.setup(width=600, height=870)
+    screen.bgcolor("black")
+    screen.title("Job Security")
+    screen.tracer(0)
     snake = Snake()
+
     scoreboard = Scoreboard()
     make_line(310)
     make_line(-305)
@@ -117,6 +115,11 @@ def main():
     screen.onkey(snake.down, "Down")
     screen.onkey(snake.left, "Left")
     screen.onkey(snake.right, "Right")
+
+    each_number_color()
+    setting_dict = generate_setting()
+    select_turtle = generate_turtle(setting_dict)
+    # main()
     index = 0
     # 1차적으로 일단 우리는 답에 대한 초기값을 설정합니다.
     # First, we set correct answer and question.
@@ -192,6 +195,23 @@ def main():
 
 
 # screen.exitonclick()
-
 if __name__ == "__main__":
-    main()
+    is_user_yes = True
+    while is_user_yes:
+        print("This snake game is to to help you get a job! \n"
+              "We have 10 questions that will informative for helping your job hunting.\n"
+              "You can see the question and choices above, and read it as fast as you can! \n"
+              "You can see five balls with different colors and each ball points the each choice\n"
+              "There will be only one ball that points to correct answer\n"
+              "On the bottom, the order of colors is choices 1, 2, 3, 4\n"
+            )
+        user_answer = input("Do you want to get a dream job? Yes or no : ")
+        if user_answer.title() == "Yes":
+            is_user_yes = False
+
+            main()
+
+        elif user_answer.title() == "No":
+            user_answer = input("I think you want to play this game, Yes or No")
+
+

@@ -9,6 +9,12 @@ question_data = [
                 "3) List of references \n"
                 "4) Project portfolio or code samples",
      "Answer": 3},
+    {"Q": "Which of the following are NOT part of the top 10 most in demand programming languages in 2023?",
+     "choices": "1) HTML "
+                "2) Python, \n"
+                "3) Javascript \n"
+                "4) SQL",
+     "Answer": 4},
     {"Q": "Which of the following are not a basic operations of a stack?",
      "choices": "1) Push \n"
                 "2) Pop \n"
@@ -53,12 +59,7 @@ question_data = [
                 "4) Having excellent problem-solving and communication skills",
      "Answer": 4},
     # Martin's questoins'
-    {"Q": "Which of the following are NOT part of the top 10 most in demand programming languages in 2023?",
-     "choices": "1) HTML "
-                "2) Python, \n"
-                "3) Javascript \n"
-                "4) SQL",
-     "Answer": 4},
+
     {"Q1": "Which of the following are NOT soft skills that employers are looking for",
      "choices": "1) Problem Solving \n"
                 "2) Communication \n"
