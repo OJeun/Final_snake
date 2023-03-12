@@ -2,7 +2,7 @@ from turtle import Screen
 from snake import Snake
 from food import Food
 from scoreboard import Scoreboard
-import data
+from data import question_data
 import time
 
 screen = Screen()
@@ -11,22 +11,34 @@ screen.bgcolor("black")
 screen.title("My Snake Game")
 screen.tracer(0)
 
+
 def make_5_foods():
+    """
+    Make 5 foods with different colors
+    :return: a list that contains five food objects
+    """
+    five_object = []
     first_choice = Food()
     first_choice.color("green")
+    five_object.append(first_choice)
     second_choice = Food()
     second_choice.color("red")
+    five_object.append(second_choice)
     third_choice = Food()
     third_choice.color("yellow")
+    five_object.append(third_choice)
     fourth_choice = Food()
     fourth_choice.color("purple")
+    five_object.append(fourth_choice)
     fifth_choice = Food()
     fifth_choice.color("blue")
+    five_object.append(fifth_choice)
+    return five_object
 
 
-with open("data.py") as data:
-    question = data.read()
-    print(question_dict["Answer"])
+# with open("data.py") as data:
+#     question = data.read()
+#     print(question_dict["Answer"])
 
 
 snake = Snake()
