@@ -198,7 +198,8 @@ def main():
 if __name__ == "__main__":
     is_user_yes = True
     while is_user_yes:
-        print("This snake game is to to help you get a job! \n"
+        print("\n"
+              "This snake game is to to help you get a job! \n"
               "We have 10 questions that will informative for helping your job hunting.\n"
               "You can see the question and choices above, and read it as fast as you can! \n"
               "You can see five balls with different colors and each ball points the each choice\n"
