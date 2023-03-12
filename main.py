@@ -1,4 +1,5 @@
-from turtle import Screen
+import turtle
+from turtle import Screen, Turtle
 from snake import Snake
 from food import Food
 from scoreboard import Scoreboard
@@ -7,7 +8,7 @@ import time
 import copy
 
 screen = Screen()
-screen.setup(width=600, height=600)
+screen.setup(width=600, height=800)
 screen.bgcolor("black")
 screen.title("My Snake Game")
 screen.tracer(0)
@@ -107,10 +108,29 @@ five_object = \
 for i in five_object:
     print(type(i))
 answer_object = question_data[0]["Answer"]
+
+
 correct_food = five_object[answer_object-1]
 print(type(correct_food))
 five_object.pop(answer_object-1)
 incorrect_choices = five_object
+
+def make_question(index):
+    question_text = question_data[index]["Q1"]
+    print(question_text)
+    question = Turtle()
+    question.goto(0, 380)
+    question.color("white")
+    question.hideturtle()
+    question.write(question_text)
+
+
+
+
+
+make_question(0)
+
+
 
 
 def answer_coord(correct_object):
@@ -159,7 +179,10 @@ while game_is_on:
 
     for i in incorrect_choices:
         if snake.head.distance(i) < 15:
+            snake.extend()
             scoreboard.decrease_score()
+
+
 
 
     # Detect collision with wall.
