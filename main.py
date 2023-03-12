@@ -4,6 +4,7 @@ from food import Food
 from scoreboard import Scoreboard
 from data import question_data
 import time
+import copy
 
 screen = Screen()
 screen.setup(width=600, height=600)
@@ -108,15 +109,17 @@ for i in five_object:
 answer_object = question_data[0]["Answer"]
 correct_food = five_object[answer_object-1]
 print(type(correct_food))
+five_object.pop(answer_object-1)
+incorrect_choices = five_object
 
 
-# def answer_coord(correct_object):
-#     x = correct_object.xcor()
-#     y = correct_object.ycor()
-#     tuple_x_y = (x, y)
-#     return tuple_x_y
-#
-# answer_coordinate = answer_coord(fifth_turtle)
+def answer_coord(correct_object):
+    x = correct_object.xcor()
+    y = correct_object.ycor()
+    tuple_x_y = (x, y)
+    return tuple_x_y
+
+answer_coordinate = answer_coord(fifth_turtle)
 
 
 
@@ -153,6 +156,10 @@ while game_is_on:
 
         snake.extend()
         scoreboard.increase_score()
+
+    for i in incorrect_choices:
+        if snake.head.distance(i) < 15:
+            scoreboard.decrease_score()
 
 
     # Detect collision with wall.
