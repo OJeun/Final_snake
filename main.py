@@ -13,28 +13,39 @@ screen.tracer(0)
 
 answer_object = "hi"
 correct_food = "Julie"
+
+first_choice = "1"
+second_choice = "2"
+third_choice = "3"
+fourth_choice = "4"
+fifth_choice = "5"
 def make_5_foods():
     """
     Make 5 foods with different colors
     :return: a list that contains five food objects
     """
     five_object = []
+    global first_choice
     first_choice = Food()
     first_choice.color("green")
     first_choice.refresh()
     five_object.append(first_choice)
+    global second_choice
     second_choice = Food()
     second_choice.color("red")
     second_choice.refresh()
     five_object.append(second_choice)
+    global third_choice
     third_choice = Food()
     third_choice.color("yellow")
     third_choice.refresh()
     five_object.append(third_choice)
+    global fourth_choice
     fourth_choice = Food()
     fourth_choice.color("purple")
     fourth_choice.refresh()
     five_object.append(fourth_choice)
+    global fifth_choice
     fifth_choice = Food()
     fifth_choice.color("blue")
     fifth_choice.refresh()
@@ -48,6 +59,7 @@ def make_5_foods():
 
     return five_object
 
+
     # global answer_object
     # answer_object = question_data[0]["Answer"]
     # print(answer_object)
@@ -57,9 +69,9 @@ def make_5_foods():
 
 
 
-# def remove_objects(list):
-#     for obj in list:
-#         list.pop
+
+
+
 
 
 def answer_coord(correct_object):
@@ -93,8 +105,17 @@ while game_is_on:
 
     # Detect collision with food.
     if snake.head.distance(correct_food) < 15:
+
         # food.refresh()
+        # initial_foods = make_5_foods()
+
+        first_choice.goto(1000, 1000)
+        second_choice.goto(1000, 1000)
+        third_choice.goto(1000, 1000)
+        fourth_choice.goto(1000, 1000)
+        fifth_choice.goto(1000, 1000)
         make_5_foods()
+
         snake.extend()
         scoreboard.increase_score()
 
