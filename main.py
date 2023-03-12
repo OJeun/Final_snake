@@ -35,11 +35,17 @@ def make_5_foods():
     five_object.append(fifth_choice)
     return five_object
 
+question_answer = question_data[0]["Answer"]
+print(question_answer)
+
 
 # with open("data.py") as data:
 #     question = data.read()
 #     print(question_dict["Answer"])
 
+# five_colors_objects = make_5_foods()
+# for food in five_colors_objects:
+#     food
 
 snake = Snake()
 food = Food()
